@@ -1,0 +1,30 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="headtag"></head>
+
+<body>
+<div th:replace="header"></div>
+
+<div class="content">
+
+    <div class="content-head" th:text="'TIER LIST - ' + ${offer.name} + ''">TIER LIST</div>
+
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th>ID</th>
+            <th>Tier name</th>
+            <th>Control</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tier: ${tiers}">
+            <td th:text="${tier.id}"></td>
+            <td th:text="${tier.name}"></td>
+            <td><a th:href="@{'/offers/' + ${offer.id} + '/tiers/' + ${tier.id} + '/edit'}">Edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

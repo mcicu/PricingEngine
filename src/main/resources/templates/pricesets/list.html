@@ -1,0 +1,36 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="headtag"></head>
+
+<body>
+<div th:replace="header"></div>
+
+<div class="content">
+
+    <div class="content-head">PRICESET LIST</div>
+
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th>ID</th>
+            <th>Priceset name</th>
+            <th>Offer name</th>
+            <th>Start date</th>
+            <th>End date</th>
+            <th>Control</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="priceset : ${pricesets}">
+            <td th:text="${priceset.getId()}"></td>
+            <td th:text="${priceset.getName()}"></td>
+            <td th:text="${priceset.getOffer().getName()}"></td>
+            <td th:text="${priceset.getStartDate()}"></td>
+            <td th:text="${priceset.getEndDate()}"></td>
+            <td><a th:href="@{'/pricesets/' + ${priceset.id} + '/edit'}">Edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

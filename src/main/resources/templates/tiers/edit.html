@@ -1,0 +1,57 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="headtag"></head>
+
+<body>
+
+<div th:replace="header"></div>
+<div class="content">
+    <div class="content-head">EDIT TIER</div>
+
+
+    <div class="row">
+        <div class="col col-7">
+            <form id="editTierForm">
+                <input type="hidden" id="id" name="id" th:value="${tier.id}"/>
+
+                <div class="form-group row">
+                    <div class="col col-8">
+                        <label for="tierName">Tier name:</label> <br/>
+                        <input id="tierName" class="form-control" type="text" name="name" th:value="${tier.name}"/>
+                    </div>
+                </div>
+
+                <div class="row-group row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary button-save" th:onclick="'submitForm(event, \'' + @{/rest/tier/save} + '\')'">Save changes</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="form-row">
+                TODO: ADD TIER CONDITIONS
+            </div>
+        </div>
+
+        <div class="row row-5">
+            <div class="col">
+                <div class="row">
+                    <div class="col col-12">
+                        <label class="">Offer:</label> <span th:text="${offer.name}"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col col-12">
+                        <label>Channels:</label> <span th:text="${offer.channels}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>

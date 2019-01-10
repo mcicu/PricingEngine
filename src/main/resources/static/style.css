@@ -1,0 +1,55 @@
+
+.header-appbar {
+    color:white;
+    background : linear-gradient(to right, #002b64, #3a7fd5); /*#002b64*/
+    padding: .2em;
+    margin-bottom: 2em;
+}
+
+.header-logo {
+    display: block;
+    padding: 0.7em;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.header-menu {
+    display: block;
+    font-size:1.2em;
+}
+
+.header-menu-item {
+    display: inline-block;
+}
+
+.header-menu-item a {
+    display: block;
+    color:white;
+    text-decoration: none;
+    padding: 0.6em;
+    margin-left: .6em;
+}
+
+.header-menu-item a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* content */
+.content {
+    display: block;
+    width: 80%;
+    min-width: 750px;
+    padding: 2em;
+    margin-left: 10%;
+    margin-right: 10%;
+    background: white;
+
+}
+
+.content-head {
+    font-size: 1.5em;
+    letter-spacing: -1px;
+    border-bottom: 1px solid #bbb;
+    margin-bottom: 1em;
+}
