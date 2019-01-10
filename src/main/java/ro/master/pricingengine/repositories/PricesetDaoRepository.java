@@ -14,5 +14,5 @@ import java.util.Set;
 public interface PricesetDaoRepository extends JpaRepository<PricesetDao, Long>, QuerydslPredicateExecutor<PricesetDao> {
 
     @Query(value = "select product_id from priceset_products where priceset_id = :pricesetId", nativeQuery = true)
-    public Set<Long> fetchProductIdsForPriceset(@Param("pricesetId") Long pricesetId);
+    public Set<Integer> fetchProductIdsForPriceset(@Param("pricesetId") Long pricesetId);
 }

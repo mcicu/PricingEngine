@@ -10,6 +10,7 @@ public class PriceCell {
     private Long pricesetId;
     private Long productId;
     private Long tierId;
+    private Double value;
 
     public Long getId() {
         return id;
@@ -57,5 +58,13 @@ public class PriceCell {
 
     public void setTierId(Long tierId) {
         this.tierId = tierId;
+    }
+
+    public Double getValue() {
+        return value;
+    }
+
+    public void setValue(Double value) {
+        this.value = value;
     }
 }

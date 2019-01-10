@@ -16,6 +16,7 @@ public class PriceCellDao {
     private Long pricesetId;
     private Long productId;
     private Long tierId;
+    private Double value;
 
     @Id
     @Column(name = "id")
@@ -70,5 +71,14 @@ public class PriceCellDao {
 
     public void setTierId(Long tierId) {
         this.tierId = tierId;
+    }
+
+    @Column(name = "value")
+    public Double getValue() {
+        return value;
+    }
+
+    public void setValue(Double value) {
+        this.value = value;
     }
 }

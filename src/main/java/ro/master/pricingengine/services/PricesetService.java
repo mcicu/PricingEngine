@@ -2,25 +2,32 @@ package ro.master.pricingengine.services;
 
 import com.querydsl.core.types.Predicate;
 import ma.glasnost.orika.MapperFacade;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ro.master.pricingengine.beans.MatrixRow;
+import ro.master.pricingengine.beans.PriceCell;
 import ro.master.pricingengine.beans.Priceset;
-import ro.master.pricingengine.entities.*;
+import ro.master.pricingengine.beans.Product;
+import ro.master.pricingengine.entities.PriceCellDao;
+import ro.master.pricingengine.entities.PricesetDao;
+import ro.master.pricingengine.entities.ProductDao;
+import ro.master.pricingengine.entities.QPriceCellDao;
 import ro.master.pricingengine.repositories.PriceCellDaoRepository;
 import ro.master.pricingengine.repositories.PricesetDaoRepository;
 import ro.master.pricingengine.repositories.ProductDaoRepository;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
 public class PricesetService {
+
+    Logger logger = LoggerFactory.getLogger(PricesetService.class);
 
     @Autowired
     PricesetDaoRepository pricesetDaoRepository;
@@ -50,17 +57,21 @@ public class PricesetService {
 
     public List<MatrixRow> getMatrixRows(Long pricesetId) {
         List<MatrixRow> output = new ArrayList<>();
-        Set<Long> productIds = pricesetDaoRepository.fetchProductIdsForPriceset(pricesetId);
+        Set<Integer> productIds = pricesetDaoRepository.fetchProductIdsForPriceset(pricesetId);
 
-        productIds.parallelStream().forEach(productId -> {
-            ProductDao productDao = productDaoRepository.findById(productId).get();
-            List<PriceCellDao> priceCells = fetchPriceCellsByPricesetIdAndProductId(pricesetId, productId);
+        for (Integer productId : productIds) {
+            ProductDao productDao = productDaoRepository.findById(productId.longValue()).get();
+            List<PriceCellDao> priceCellDaos = fetchPriceCellsByPricesetIdAndProductId(pricesetId, productId.longValue());
 
-            MatrixRowDao row = new MatrixRowDao();
-            row.setProductDao(productDao);
+            HashMap<String, PriceCell> priceCells = (HashMap<String, PriceCell>) priceCellDaos.stream()
+                    .map(pc -> mapperFacade.map(pc, PriceCell.class))
+                    .collect(Collectors.toMap((PriceCell cell) -> "priceTier" + cell.getTierId(), Function.identity()));
+
+            MatrixRow row = new MatrixRow();
+            row.setProduct(mapperFacade.map(productDao, Product.class));
             row.setPriceCells(priceCells);
-            output.add(mapperFacade.map(row, MatrixRow.class));
-        });
+            output.add(row);
+        }
 
         return output;
     }

@@ -1,11 +1,12 @@
 package ro.master.pricingengine.beans;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class MatrixRow {
 
     private Product product;
-    private List<PriceCell> priceCells;
+    private HashMap<String, PriceCell>  priceCells;
 
     public Product getProduct() {
         return product;
@@ -15,11 +16,11 @@ public class MatrixRow {
         this.product = product;
     }
 
-    public List<PriceCell> getPriceCells() {
+    public HashMap<String, PriceCell> getPriceCells() {
         return priceCells;
     }
 
-    public void setPriceCells(List<PriceCell> priceCells) {
+    public void setPriceCells(HashMap<String, PriceCell> priceCells) {
         this.priceCells = priceCells;
     }
 }
