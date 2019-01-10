@@ -6,7 +6,7 @@ import java.util.List;
 public class MatrixRow {
 
     private Product product;
-    private HashMap<String, PriceCell>  priceCells;
+    private HashMap<String, PriceCell>  priceCells; //key format: "priceTier{tierId}"
 
     public Product getProduct() {
         return product;

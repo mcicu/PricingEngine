@@ -85,4 +85,24 @@ public class PricesetService {
         priceCellDaoIterable.forEach(output::add);
         return output;
     }
+
+    public void savePriceCells(List<PriceCell> priceCells) {
+        for (PriceCell cell : priceCells) {
+            if (null != cell.getId()) {
+                PriceCellDao priceCellDao = priceCellDaoRepository.findById(cell.getId()).get();
+                priceCellDao.setValue(cell.getValue());
+                priceCellDaoRepository.save(priceCellDao);
+            }
+            else {
+                PriceCellDao priceCellDao = new PriceCellDao();
+                priceCellDao.setValue(cell.getValue());
+                priceCellDao.setTierId(cell.getTierId());
+                priceCellDao.setPricesetId(cell.getPricesetId());
+                priceCellDao.setProductId(cell.getProductId());
+                priceCellDaoRepository.save(priceCellDao);
+            }
+        }
+
+        priceCellDaoRepository.flush();
+    }
 }
