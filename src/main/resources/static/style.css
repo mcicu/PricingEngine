@@ -3,7 +3,6 @@
     color:white;
     background : linear-gradient(to right, #002b64, #3a7fd5); /*#002b64*/
     padding: .2em;
-    margin-bottom: 2em;
 }
 
 .header-logo {
@@ -38,20 +37,13 @@
 /* content */
 .content {
     display: block;
-    width: 80%;
+    width: 86%;
     min-width: 750px;
     padding: 2em;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 7%;
+    margin-right: 7%;
     background: white;
 
-}
-
-.content-head {
-    font-size: 1.5em;
-    letter-spacing: -1px;
-    border-bottom: 1px solid #bbb;
-    margin-bottom: 1em;
 }
 
 pre {

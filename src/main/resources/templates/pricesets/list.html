@@ -7,30 +7,38 @@
 
 <div class="content">
 
-    <div class="content-head">PRICESET LIST</div>
+    <div class="row pb-2 mt-4 mb-4 border-bottom">
+        <div class="col col-9"><h3>Priceset List</h3></div>
+        <div class="col col-3 text-right">
+            <button class="btn btn-primary">Add priceset</button>
+        </div>
+    </div>
 
-    <table class="table">
-        <thead class="thead-light">
-        <tr>
-            <th>ID</th>
-            <th>Priceset name</th>
-            <th>Offer name</th>
-            <th>Start date</th>
-            <th>End date</th>
-            <th>Control</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="priceset : ${pricesets}">
-            <td th:text="${priceset.getId()}"></td>
-            <td th:text="${priceset.getName()}"></td>
-            <td th:text="${priceset.getOffer().getName()}"></td>
-            <td th:text="${priceset.getStartDate()}"></td>
-            <td th:text="${priceset.getEndDate()}"></td>
-            <td><a th:href="@{'/pricesets/' + ${priceset.id} + '/edit'}">Edit</a></td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="row">
+
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Priceset name</th>
+                <th>Offer name</th>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>Control</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="priceset : ${pricesets}">
+                <td th:text="${priceset.getId()}"></td>
+                <td th:text="${priceset.getName()}"></td>
+                <td th:text="${priceset.getOffer().getName()}"></td>
+                <td th:text="${priceset.getStartDate()}"></td>
+                <td th:text="${priceset.getEndDate()}"></td>
+                <td><a th:href="@{'/pricesets/' + ${priceset.id} + '/edit'}">Edit</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>

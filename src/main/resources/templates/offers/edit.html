@@ -6,7 +6,12 @@
 
 <div th:replace="header"></div>
 <div class="content">
-    <div class="content-head">EDIT OFFER</div>
+
+    <div class="row pb-2 mt-4 mb-4 border-bottom">
+        <div class="col">
+            <h3>Edit offer</h3>
+        </div>
+    </div>
 
     <form id="editOfferForm">
         <input type="hidden" id="id" name="id" th:value="${offer.id}"/>

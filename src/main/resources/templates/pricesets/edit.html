@@ -7,44 +7,73 @@
     var OFFER_ID = /*[[${priceset.offer.id}]]*/ "undefined";
     var PRICESET_ID = /*[[${priceset.id}]]*/ "undefined";
 </script>
-<script type="text/javascript" th:src="@{/pricesets.js}"></script>
+<script th:src="@{/pricesets.js}" type="text/javascript"></script>
 
 <div th:replace="header"></div>
 <div class="content">
-    <div class="content-head">EDIT PRICESET</div>
-
-    <form id="editPricesetForm">
-        <input type="hidden" id="id" name="id" th:value="${priceset.id}"/>
-
-        <div class="form-row">
-            <div class="col">
-                <label>Offer Name: </label>
-                <span th:text="${priceset.offer.name}"></span>
-            </div>
+    <div class="row pb-2 mt-4 mb-4 border-bottom">
+        <div class="col col-9"><h3>Edit priceset</h3></div>
+        <div class="col col-3 text-right">
+            <button class="btn btn-success">Approve</button>
         </div>
-        <div class="form-group row">
-            <div class="col col-3">
-                <label for="pricesetName">Priceset Name</label>
-                <input class="form-control" id="pricesetName" type="text" name="name" th:value="${priceset.name}"/>
-            </div>
+    </div>
 
-            <div class="col col-3">
-                <label for="startDate">Start date</label>
-                <input data-provide="datepicker" class="form-control" id="startDate" type="text" name="startDate" th:value="${priceset.startDate}"/>
-            </div>
+    <div class="row">
+        <div class="col">
+            <form class="pb-2 mb-4 border-bottom" id="editPricesetForm">
+                <input id="id" name="id" th:value="${priceset.id}" type="hidden"/>
+                <div class="row">
+                    <div class="col col-8">
+                        <div class="row mb-2">
+                            <div class="col col-8">
+                                <label for="pricesetName">Priceset Name</label>
+                                <input class="form-control" id="pricesetName" name="name" th:value="${priceset.name}"
+                                       type="text"/>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <i class="fa fa-clock"></i>
+                            <div class="col col-4">
+                                <label for="startDate">Start date</label>
+                                <input type="text" class="form-control datetimepicker-input" id="datetimepicker5" data-toggle="datetimepicker" data-target="#datetimepicker5"/>
+                            </div>
 
-            <div class="col col-3">
-                <label for="endDate">End date</label>
-                <input data-provide="datepicker" class="form-control" id="endDate" type="text" name="endDate" th:value="${priceset.endDate}"/>
-            </div>
+                            <div class="col col-4">
+                                <label for="endDate">End date</label>
+                                <input class="form-control" id="endDate" name="endDate" th:value="${priceset.endDate}"
+                                       type="text"/>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col col-8 text-right">
+                                <button class="btn btn-outline-primary">Manage product list</button>
+
+                                <button class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col col-4">
+                        <div class="row mb-5">
+                            <div class="col">
+                                <label>Offer Name: </label>
+                                <span th:text="${priceset.offer.name}"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                Current priceset is in a <span class="badge badge-warning">work in progress</span>
+                                state.
+                                Press <span class="badge badge-success">Approve</span> to launch it in production.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-
-        <div class="form-group row">
-            <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary mb-2">SAVE CHANGES</button>
-            </div>
-        </div>
-    </form>
+    </div>
 
     <pre id="pricesetmatrixlabel">Matrix changes will be autosaved</pre>
     <div id="pricesetmatrix">
