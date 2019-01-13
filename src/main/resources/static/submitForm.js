@@ -1,4 +1,4 @@
-function submitForm(event, url) {
+function submitForm(event, url, successURL = null) {
     event.preventDefault();
     var button = event.target || event.srcElement;
     var formular = $(button).parents("form").first();
@@ -15,10 +15,19 @@ function submitForm(event, url) {
                 $(button).html("Saving...");
             },
             success: function (result) {
-                location.reload();
+                $(button).html("Data saved <i class='fa fa-check'></i>");
+                setTimeout(function () {
+                    if (null === successURL || 'null' == successURL)
+                        location.reload();
+                    else
+                        window.location.replace(successURL);
+
+                }, 2000);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(textStatus + " " + errorThrown);
+                if (null != jqXHR.responseJSON && null != jqXHR.responseJSON.message)
+                    alert(jqXHR.responseJSON.message);
+                else alert(textStatus + " " + errorThrown);
             }
         });
 }

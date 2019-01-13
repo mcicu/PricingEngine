@@ -1,9 +1,6 @@
 package ro.master.pricingengine.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "TIERS")
@@ -14,6 +11,7 @@ public class TierDao {
     private Long offerId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public Long getId() {
         return id;

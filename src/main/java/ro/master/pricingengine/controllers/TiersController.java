@@ -28,7 +28,18 @@ public class TiersController {
         model.addAttribute("offer", offer);
         model.addAttribute("tiers", tiers);
 
-        return "/tiers/list";
+        return "tiers/list";
+    }
+
+    @RequestMapping("/offers/{offerId}/tiers/add")
+    public String addOfferTier(@PathVariable("offerId") Long offerId, Model model) {
+        Offer offer = offerService.getOffer(offerId);
+        Tier tier = new Tier();
+        model.addAttribute("isNewTier", true);
+        model.addAttribute("offer", offer);
+        model.addAttribute("tier", tier);
+
+        return "tiers/edit";
     }
 
     @RequestMapping("/offers/{offerId}/tiers/{tierId}/edit")
@@ -38,6 +49,6 @@ public class TiersController {
         model.addAttribute("offer", offer);
         model.addAttribute("tier", tier);
 
-        return "/tiers/edit";
+        return "tiers/edit";
     }
 }

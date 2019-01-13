@@ -1,7 +1,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="headtag"></head>
-
 <body>
 
 <div th:replace="header"></div>
@@ -9,39 +8,47 @@
 
     <div class="row pb-2 mt-4 mb-4 border-bottom">
         <div class="col">
-            <h3>Edit offer</h3>
+            <h3 th:text="${isNewOffer} ? 'Add offer' : 'Edit offer'">Edit offer</h3>
         </div>
     </div>
 
     <form id="editOfferForm">
-        <input type="hidden" id="id" name="id" th:value="${offer.id}"/>
+        <input id="id" name="id" th:value="${offer.id}" type="hidden"/>
 
         <div class="form-group row">
             <div class="col col-6">
                 <label for="offerName">Name</label> <br/>
-                <input id="offerName" class="form-control" type="text" name="name" th:value="${offer.name}"/>
+                <input class="form-control" id="offerName" name="name" th:value="${offer.name}" type="text"/>
             </div>
         </div>
 
         <div class="form-group row">
             <div class="col col-6">
                 <label for="offerDescription">Description</label> <br/>
-                <textarea id="offerDescription" class="form-control" type="text" name="description" th:text="${offer.description}"></textarea>
+                <textarea class="form-control" id="offerDescription" name="description" th:text="${offer.description}"
+                          type="text"></textarea>
             </div>
         </div>
 
         <div class="form-group row">
             <div class="col col-6">
                 <div class="form-check" th:each="channel: ${channels}">
-                    <input class="form-check-input" type="checkbox" name="channels[]" th:id="${'offerchannel'+channel.id}" th:value="${channel.id}" th:checked="${offer.channels.contains(channel.id)}">
-                    <label class="form-check-label" th:text="${channel.name}" th:for="${'offerchannel'+channel.id}"></label>
+                    <input class="form-check-input" name="channels[]"
+                           th:checked="${offer.channels.contains(channel.id)}"
+                           th:id="${'offerchannel'+channel.id}" th:value="${channel.id}"
+                           type="checkbox">
+                    <label class="form-check-label" th:for="${'offerchannel'+channel.id}"
+                           th:text="${channel.name}"></label>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
             <div class="row">
-                <button type="submit" class="btn btn-primary" th:onclick="'submitForm(event, \'' + @{/rest/offer/save} + '\')'">Save changes</button>
+                <button class="btn btn-primary"
+                        th:onclick="'submitForm(event, \'' + @{/rest/offer/save} + '\', \'' + (${isNewOffer} ? @{/offers} : null) + '\')'"
+                        type="submit">Save changes
+                </button>
             </div>
         </div>
     </form>

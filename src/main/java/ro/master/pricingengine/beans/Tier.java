@@ -1,9 +1,17 @@
 package ro.master.pricingengine.beans;
 
+import com.sun.istack.NotNull;
+
+import javax.validation.constraints.NotEmpty;
+
 public class Tier {
 
     private Long id;
+
+    @NotEmpty
     private String name;
+
+    @NotNull
     private Long offerId;
 
     public Long getId() {

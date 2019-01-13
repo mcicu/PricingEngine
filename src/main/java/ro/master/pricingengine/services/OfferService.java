@@ -56,14 +56,14 @@ public class OfferService {
     }
 
     public void saveOffer(Offer offer) {
-        Assert.notNull(offer.getId(), "Error: Trying to save an offer with null id");
-
-        Optional<OfferDao> optionalOfferDao = offerDaoRepository.findById(offer.getId());
-        Assert.isTrue(optionalOfferDao.isPresent(), MessageFormat.format("Offer with id = {0} was not found", offer.getId()));
+        OfferDao offerDao = new OfferDao(); //assuming we have a new offer
+        if (null != offer.getId()) {
+            Optional<OfferDao> optionalOfferDao = offerDaoRepository.findById(offer.getId());
+            Assert.isTrue(optionalOfferDao.isPresent(), MessageFormat.format("Offer with id = {0} was not found", offer.getId()));
+            offerDao = optionalOfferDao.get();
+        }
 
         List<ChannelDao> channelDaos = CollectionUtils.isEmpty(offer.getChannels()) ? new ArrayList<>() : channelDaoRepository.findAllById(offer.getChannels());
-
-        OfferDao offerDao = optionalOfferDao.get();
         offerDao.setName(offer.getName());
         offerDao.setDescription(offer.getDescription());
         offerDao.setChannels(channelDaos);

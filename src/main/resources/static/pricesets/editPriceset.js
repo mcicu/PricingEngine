@@ -2,6 +2,15 @@ var tiersData = []; //to be loaded
 var rowsData = [];
 
 $(document).ready(function () {
+
+    var startDate = moment($("#startDateInput").val(), 'YYYY-MM-DD[T]HH:mm').toDate(); //backend date
+    $("#startDateInput").datetimepicker({date: null}); //initialize with null (bug workaround)
+    $("#startDateInput").datetimepicker('date', startDate);
+
+    var endDate = moment($("#endDateInput").val(), 'YYYY-MM-DD[T]HH:mm').toDate(); //backend date
+    $("#endDateInput").datetimepicker({date: null}); //initialize with null (bug workaround)
+    $("#endDateInput").datetimepicker('date', endDate);
+
     $.ajax({
         "url": "/PricingEngine/rest/offers/{offerId}/tiers".replace("{offerId}", OFFER_ID),
         "method": "GET",
@@ -42,6 +51,7 @@ function triggerHotRendering() {
                 columnMeta.className = "htCenter htMiddle";
                 columnMeta.validator = Handsontable.validators.NumericValidator;
                 columnMeta.allowInvalid = false;
+
             } else columnMeta = null;
 
             return columnMeta;
@@ -73,8 +83,8 @@ function saveHotModifiedCells(change, source) {
     $.ajax({
         "url": "/PricingEngine/rest/pricesets/{pricesetId}/cells/save".replace("{pricesetId}", PRICESET_ID),
         "method": "POST",
-        "headers" : {"Content-Type": "application/json"},
-        "data" : JSON.stringify(modifiedCells),
+        "headers": {"Content-Type": "application/json"},
+        "data": JSON.stringify(modifiedCells),
         "success": function (data) {
             console.log("cells saved");
         }

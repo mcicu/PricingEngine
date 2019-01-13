@@ -1,5 +1,6 @@
 package ro.master.pricingengine.beans;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ public class Offer {
 
     private Long id;
 
+    @NotEmpty
     private String name;
 
     private String description;

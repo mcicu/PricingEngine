@@ -1,6 +1,7 @@
 package ro.master.pricingengine.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ro.master.pricingengine.beans.SimpleRestResponse;
 import ro.master.pricingengine.beans.Tier;
@@ -15,7 +16,7 @@ public class TiersRestController extends AbstractRestController {
     TierService tierService;
 
     @PostMapping(path = "/rest/tier/save", consumes = "application/json", produces = "application/json")
-    public SimpleRestResponse saveTier(@RequestBody Tier tier) {
+    public SimpleRestResponse saveTier(@RequestBody @Validated Tier tier) {
         tierService.saveTier(tier);
         return new SimpleRestResponse();
     }

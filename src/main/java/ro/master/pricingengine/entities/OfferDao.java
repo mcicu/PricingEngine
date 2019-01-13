@@ -16,6 +16,7 @@ public class OfferDao {
     private List<ChannelDao> channels;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }

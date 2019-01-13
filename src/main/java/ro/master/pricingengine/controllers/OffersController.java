@@ -34,10 +34,19 @@ public class OffersController {
         return "offers/list";
     }
 
+    @RequestMapping("/offers/add")
+    public String addOffer(Model model) {
+        Offer offer = new Offer();
+        List<Channel> channels = channelService.getChannelList();
+        model.addAttribute("isNewOffer", true);
+        model.addAttribute("offer", offer);
+        model.addAttribute("channels", channels);
+        return "offers/edit";
+    }
+
     @RequestMapping("/offers/{id}/edit")
     public String editOffer(@PathVariable("id") Long id, Model model) {
         Offer offer = offerService.getOffer(id);
-        logger.info("offer {}", JsonUtils.toJson(offer));
         List<Channel> channels = channelService.getChannelList();
         model.addAttribute("offer", offer);
         model.addAttribute("channels", channels);

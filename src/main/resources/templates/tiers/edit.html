@@ -9,7 +9,7 @@
 
     <div class="row pb-2 mt-4 mb-4 border-bottom">
         <div class="col">
-            <h3>Edit tier</h3>
+            <h3 th:text="${isNewTier} ? 'Add tier' : 'Edit tier'">Edit tier</h3>
         </div>
     </div>
 
@@ -17,18 +17,22 @@
     <div class="row">
         <div class="col col-7">
             <form id="editTierForm">
-                <input type="hidden" id="id" name="id" th:value="${tier.id}"/>
+                <input id="id" name="id" th:value="${tier.id}" type="hidden"/>
+                <input id="offerId" name="offerId" th:value="${offer.id}" type="hidden"/>
 
                 <div class="form-group row">
                     <div class="col col-8">
                         <label for="tierName">Tier name:</label> <br/>
-                        <input id="tierName" class="form-control" type="text" name="name" th:value="${tier.name}"/>
+                        <input class="form-control" id="tierName" name="name" th:value="${tier.name}" type="text"/>
                     </div>
                 </div>
 
                 <div class="row-group row">
                     <div class="col">
-                        <button type="submit" class="btn btn-primary button-save" th:onclick="'submitForm(event, \'' + @{/rest/tier/save} + '\')'">Save changes</button>
+                        <button class="btn btn-primary button-save"
+                                th:onclick="'submitForm(event, \'' + @{/rest/tier/save} + '\', \'' + @{'/offers/' + ${offer.id} + '/tiers'} + '\')'"
+                                type="submit">Save changes
+                        </button>
                     </div>
                 </div>
             </form>

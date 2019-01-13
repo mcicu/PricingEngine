@@ -10,7 +10,7 @@
     <div class="row pb-2 mt-4 mb-4 border-bottom">
         <div class="col col-9"><h3>Offer List</h3></div>
         <div class="col col-3 text-right">
-            <button class="btn btn-primary">Add offer</button>
+            <a class="btn btn-primary" th:href="@{/offers/add}">Add offer</a>
         </div>
     </div>
 
@@ -21,8 +21,9 @@
                 <th>ID</th>
                 <th>Offer name</th>
                 <th>Description</th>
-                <th>Control</th>
-                <th>Control</th>
+                <th class="text-right">Edit</th>
+                <th class="text-right">Delete</th>
+                <th class="text-right">Control</th>
             </tr>
             </thead>
             <tbody>
@@ -30,8 +31,9 @@
                 <td th:text="${offer.id}"></td>
                 <td th:text="${offer.name}"></td>
                 <td th:text="${offer.description}"></td>
-                <td><a th:href="@{'/offers/' + ${offer.id} + '/edit'}">Edit</a></td>
-                <td><a th:href="@{'/offers/' + ${offer.id} + '/tiers'}">Tiers</a></td>
+                <td class="text-right"><a th:href="@{'/offers/' + ${offer.id} + '/edit'}">edit</a></td>
+                <td class="text-right"><a th:href="@{'/offers/' + ${offer.id} + '/delete'}">delete</a></td>
+                <td class="text-right"><a th:href="@{'/offers/' + ${offer.id} + '/tiers'}">Tiers</a></td>
             </tr>
             </tbody>
         </table>

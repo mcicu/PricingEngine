@@ -43,12 +43,14 @@ public class TierService {
     }
 
     public void saveTier(Tier tier) {
-        Assert.notNull(tier.getId(), "Error: Trying to save a tier with null id");
+        TierDao tierDao = new TierDao(); //assuming we have a new tier
+        tierDao.setOfferId(tier.getOfferId());
 
-        Optional<TierDao> optionalTierDao = tierDaoRepository.findById(tier.getId());
-        Assert.isTrue(optionalTierDao.isPresent(), MessageFormat.format("Tier with id = {0} was not found", tier.getId()));
-
-        TierDao tierDao = optionalTierDao.get();
+        if (null != tier.getId()) {
+            Optional<TierDao> optionalTierDao = tierDaoRepository.findById(tier.getId());
+            Assert.isTrue(optionalTierDao.isPresent(), MessageFormat.format("Tier with id = {0} was not found", tier.getId()));
+            tierDao = optionalTierDao.get();
+        }
         tierDao.setName(tier.getName());
 
         tierDaoRepository.saveAndFlush(tierDao);
